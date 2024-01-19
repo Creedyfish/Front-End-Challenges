@@ -1,3 +1,4 @@
+// This is the main App component
 import "./App.css";
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
       <div className="bg-dark-grey-neutral p-8 flex flex-col gap-4 justify-center items-center rounded-md">
         <div className="flex">
           <img
+            // This is the user's avatar
             className="rounded-full h-20 w-20"
             src="/images/avatar-jessica.jpeg"
             alt="avatar"
@@ -22,6 +24,7 @@ function App() {
         <div className="text-white text-sm py-2 px-4">
           "Front-end developer and avid reader."
         </div>
+        {/* These are the user's social media buttons */}
         <button className="font-semibold text-sm p-3 rounded-md text-white bg-grey-neutral w-full flex justify-center items-center hover:text-off-black-neutral hover:bg-green-primary focus:text-off-black-neutral focus:bg-green-primary transition-colors duration-200 ease-in-out">
           GitHub
         </button>
