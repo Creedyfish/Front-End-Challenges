@@ -22,9 +22,9 @@ Users should be able to:
 
 ### Screenshot
 
-![Desktop](src/assets/screenshot.jpg)
-![screenshot-mobile](src/assets/screenshot-mobile.jpg)
-![screenshot-mobile](src/assets/screenshot-active.jpg)
+![Desktop](src/assets/screenshot.jpeg)
+![screenshot-mobile](src/assets/screenshot-mobile.png)
+![screenshot-mobile](src/assets/screenshot-active.png)
 
 ### Links
 
