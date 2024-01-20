@@ -1,7 +1,18 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Inter, Ubuntu } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const ubuntu = Ubuntu({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-ubuntu",
+  weight: ["400", "500", "700"], // Add the missing weight property
+});
 
 export const metadata = {
   title: "Frontend Mentor | Multi-step form",
@@ -14,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={`${inter.variable} ${ubuntu.variable}`}>
+      <body className="">{children}</body>
     </html>
   );
 }

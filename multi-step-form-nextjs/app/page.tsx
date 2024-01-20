@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {/* Sidebar start */}
-      <div>
+      <div className="font-ubuntu">
         Step 1 Your info Step 2 Select plan Step 3 Add-ons Step 4 Summary
       </div>
       {/* Sidebar end */}
