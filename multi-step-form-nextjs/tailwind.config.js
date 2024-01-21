@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       colors: {
         "marine-blue": "hsl(213, 96%, 18%)",
-        "purplish-blue": "hsl(243, 100%, 62%)",
+        "purplis-hblue": "hsl(243, 100%, 62%)",
         "pastel-blue": "hsl(228, 100%, 84%)",
         "light-blue": "hsl(206, 94%, 87%)",
         "strawberry-red": "hsl(354, 84%, 57%)",
@@ -17,10 +17,15 @@ module.exports = {
         "light-gray": "hsl(229, 24%, 87%)",
         magnolia: "hsl(217, 100%, 97%)",
         alabaster: "hsl(231, 100%, 99%)",
-        white: "hsl(0, 0%, 100%)",
       },
       fontFamily: {
         sans: ["var(--font-ubuntu)"],
+      },
+      screens: {
+        xs: "376px",
+      },
+      boxShadow: {
+        "3xl": "0 25px 60px -20px rgba(0, 0, 0, 0.3)",
       },
     },
   },
