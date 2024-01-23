@@ -4,29 +4,17 @@ import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-const Step1Schema = z.object({
-  name: z.string().min(1, { message: "This Field is Required" }),
-  email: z
-    .string()
-    .min(1, { message: "This Field is Required" })
-    .email({ message: "Please enter a valid Email" }),
-  phone: z
-    .string()
-    .min(1, { message: "This Field is Required" })
-    .transform((data) => Number(data)),
-});
+import Step1 from "./components/Step1";
 
 const Step2Schema = z.object({
   plan: z.enum(["Arcade", "Advanced", "Pro"]),
   billing: z.enum(["Monthly", "Yearly"]),
 });
 
-type Step1Fields = z.infer<typeof Step1Schema>;
 type Step2Fields = z.infer<typeof Step2Schema>;
 
 export default function Home() {
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({});
 
   useEffect(() => {
@@ -79,120 +67,38 @@ export default function Home() {
   );
 }
 
-function Step1({ setFormData, formData, setCurrentStep }: any) {
+function Step2({ setFormData, formData, setCurrentStep }: any) {
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
+    getValues,
     formState: { errors, isValid },
-  } = useForm<Step1Fields>({
-    resolver: zodResolver(Step1Schema),
+  } = useForm<Step2Fields>({
+    resolver: zodResolver(Step2Schema),
   });
-  const savedData: SubmitHandler<Step1Fields> = (data: any) => {
-    setFormData({ ...formData, ...data });
-    setCurrentStep((prev: number) => prev + 1);
+
+  const billing = watch("billing") ? "Monthly" : "Yearly";
+
+  const savedData: SubmitHandler<Step2Fields> = (data: any) => {
+    setFormData({ ...formData, ...data, billing: billing });
+
+    // setFormData({ ...formData, ...data });
+    // setCurrentStep((prev: number) => prev + 1);
   };
+
   return (
     <form
       className="bg-white flex flex-col rounded-md px-6 py-6 -translate-y-24 shadow-light-blue shadow-3xl gap-4"
       onSubmit={handleSubmit(savedData)}
     >
       <div className="flex text-2xl font-bold text-marine-blue">
-        Personal Info
+        Select your plan
       </div>
       <div className="flex text-cool-gray">
-        Please provide your name, email address, and phone
+        You have the option of monthly or yearly billing.{" "}
       </div>
-      <div className="flex flex-col">
-        <div className="flex items-center justify-between">
-          <div className="text-marine-blue text-sm">Name</div>
-          {errors.name?.message && (
-            <div className="text-xs text-strawberry-red">
-              {errors.name.message}
-            </div>
-          )}
-        </div>
-
-        <input
-          {...register("name")}
-          className={`text-lg py-2 px-7 w-full  placeholder-cool-gray  border-[1px] rounded-md ${
-            errors.name && "border-red-500"
-          }`}
-          type="text"
-          placeholder="e.g. Stephen King"
-        />
-      </div>
-      <div className="flex flex-col">
-        <div className="flex items-center justify-between">
-          <div className="text-marine-blue text-sm">Email Address</div>{" "}
-          {errors.email?.message && (
-            <div className="text-xs text-strawberry-red">
-              {errors.email.message}
-            </div>
-          )}
-        </div>
-
-        <input
-          className={`text-lg py-2 px-7 w-full placeholder-cool-gray border-[1px] rounded-md ${
-            errors.email && "border-red-500"
-          }`}
-          {...register("email")}
-          type="text"
-          placeholder="e.g. stephenking@lorem.com"
-        />
-      </div>
-      <div className="flex flex-col">
-        <div className="flex items-center justify-between">
-          <div className="text-marine-blue text-sm">Phone Number</div>
-          {errors.phone?.message && (
-            <div className="text-xs text-strawberry-red">
-              {errors.phone.message}
-            </div>
-          )}
-        </div>
-
-        <input
-          {...register("phone")}
-          className={`text-lg py-2 px-7 w-full  placeholder-cool-gray  border-[1px] rounded-md ${
-            errors.phone && "border-red-500"
-          }`}
-          type="number"
-          placeholder="e.g. +1 234 567 890"
-        />
-      </div>
-      <div className="flex justify-end">
-        <button
-          type="submit"
-          // disabled={Object.values(watchInputs).some((value) => !value)}
-          // onClick={(e) => setCurrentStep((prev: any) => prev + 1)}
-          // (e) => setCurrentStep((prev: any) => prev + 1)
-          className="flex text-base text-white bottom-0 rounded-md px-4 py-2 bg-marine-blue"
-        >
-          Next Step
-        </button>
-      </div>
-    </form>
-  );
-}
-
-function Step2({ setFormData, formData, setCurrentStep }: any) {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors, isValid },
-  } = useForm<Step2Fields>({
-    resolver: zodResolver(Step2Schema),
-  });
-  const savedData: SubmitHandler<Step2Fields> = (data: any) => {
-    setFormData({ ...formData, ...data });
-    // setCurrentStep((prev: number) => prev + 1);
-  };
-  return (
-    <form
-      className="bg-white flex flex-col rounded-md px-6 py-6 -translate-y-24 shadow-light-blue shadow-3xl gap-4"
-      onSubmit={handleSubmit(savedData)}
-    >
       <div>
         <input
           {...register("plan")}
@@ -201,9 +107,47 @@ function Step2({ setFormData, formData, setCurrentStep }: any) {
           className="peer hidden"
           type="radio"
           value="Arcade"
+          defaultChecked
         />
-        <label htmlFor="arcade" className="peer-checked:bg-slate-950">
-          Arcade
+        <label
+          htmlFor="arcade"
+          className="flex rounded-md peer-checked:outline outline-1 outline-purplish-blue"
+        >
+          <div className="grid grid-cols-[max-content_1fr] p-3 gap-x-3">
+            <div className="flex items-center">
+              {" "}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 40 40"
+              >
+                <g fill="none" fill-rule="evenodd">
+                  <circle cx="20" cy="20" r="20" fill="#FFAF7E" />
+                  <path
+                    fill="#FFF"
+                    fill-rule="nonzero"
+                    d="M24.995 18.005h-3.998v5.998h-2v-5.998H15a1 1 0 0 0-1 1V29a1 1 0 0 0 1 1h9.995a1 1 0 0 0 1-1v-9.995a1 1 0 0 0-1-1Zm-5.997 8.996h-2v-1.999h2v2Zm2-11.175a2.999 2.999 0 1 0-2 0v2.18h2v-2.18Z"
+                  />
+                </g>
+              </svg>
+            </div>
+            <div className=" ">
+              <div className="font-bold text-marine-blue">Arcade</div>
+              <div>
+                {billing === "Monthly" ? <div>$9/mo</div> : <div>$90/yr</div>}
+              </div>
+            </div>
+            {billing === "Monthly" ? null : (
+              <>
+                {" "}
+                <div></div>
+                <div className="text-marine-blue text-sm font-medium">
+                  2 months free
+                </div>
+              </>
+            )}
+          </div>
         </label>
       </div>
       <div>
@@ -215,7 +159,10 @@ function Step2({ setFormData, formData, setCurrentStep }: any) {
           type="radio"
           value="Advanced"
         />
-        <label htmlFor="advanced" className="peer-checked:bg-slate-950">
+        <label
+          htmlFor="advanced"
+          className="peer-checked:outline outline-1 outline-purplish-blue"
+        >
           Advanced
         </label>
       </div>
@@ -228,11 +175,17 @@ function Step2({ setFormData, formData, setCurrentStep }: any) {
           type="radio"
           value="Pro"
         />
-        <label htmlFor="pro" className="peer-checked:bg-slate-950">
+        <label
+          htmlFor="pro"
+          className="peer-checked:outline outline-1 outline-purplish-blue"
+        >
           Pro
         </label>
       </div>
-      <div className="flex gap-6">
+      <div>
+        <input {...register("billing")} type="checkbox" />
+      </div>
+      {/* <div className="flex gap-6">
         <div>
           <input
             {...register("billing")}
@@ -240,12 +193,14 @@ function Step2({ setFormData, formData, setCurrentStep }: any) {
             name="billing"
             className="peer hidden"
             type="radio"
-            value="Monthly"
+            defaultChecked
+            value={"Monthly"}
           />
           <label htmlFor="monthly" className="peer-checked:bg-slate-950">
             Monthly
           </label>
         </div>
+        <label htmlFor="monthly">sdasdsd</label>
         <div>
           <input
             {...register("billing")}
@@ -253,13 +208,13 @@ function Step2({ setFormData, formData, setCurrentStep }: any) {
             id="yearly"
             className="peer hidden"
             type="radio"
-            value="Yearly"
+            value={"Yearly"}
           />
           <label htmlFor="yearly" className="peer-checked:bg-slate-950">
             Yearly
           </label>
         </div>
-      </div>
+      </div> */}
       <div className="flex justify-end">
         <button
           type="submit"
