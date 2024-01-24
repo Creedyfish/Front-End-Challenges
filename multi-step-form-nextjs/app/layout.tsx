@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${ubuntu.variable} w-full h-full bg-red-500`}
+      className={`${inter.variable} ${ubuntu.variable} w-full h-full bg-white`}
     >
       <body className="h-full w-full ">{children}</body>
     </html>

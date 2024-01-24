@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-const Step1Schema = z.object({
+
+export const Step1Schema = z.object({
   name: z.string().min(1, { message: "This Field is Required" }),
   email: z
     .string()
@@ -14,7 +15,9 @@ const Step1Schema = z.object({
     .min(1, { message: "This Field is Required" })
     .transform((data) => Number(data)),
 });
+
 type Step1Fields = z.infer<typeof Step1Schema>;
+
 export default function Step1({ setFormData, formData, setCurrentStep }: any) {
   const {
     register,
@@ -52,7 +55,7 @@ export default function Step1({ setFormData, formData, setCurrentStep }: any) {
         <input
           {...register("name")}
           className={`text-lg py-2 px-7 w-full  placeholder-cool-gray  border-[1px] rounded-md ${
-            errors.name && "border-red-500"
+            errors.name && "border-strawberry-red"
           }`}
           type="text"
           placeholder="e.g. Stephen King"
@@ -70,7 +73,7 @@ export default function Step1({ setFormData, formData, setCurrentStep }: any) {
 
         <input
           className={`text-lg py-2 px-7 w-full placeholder-cool-gray border-[1px] rounded-md ${
-            errors.email && "border-red-500"
+            errors.email && "border-strawberry-red"
           }`}
           {...register("email")}
           type="text"
@@ -90,7 +93,7 @@ export default function Step1({ setFormData, formData, setCurrentStep }: any) {
         <input
           {...register("phone")}
           className={`text-lg py-2 px-7 w-full  placeholder-cool-gray  border-[1px] rounded-md ${
-            errors.phone && "border-red-500"
+            errors.phone && "border-strawberry-red"
           }`}
           type="number"
           placeholder="e.g. +1 234 567 890"
