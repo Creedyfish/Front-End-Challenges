@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,7 +14,7 @@ export const Step1Schema = z.object({
     .transform((data) => Number(data)),
 });
 
-type Step1Fields = z.infer<typeof Step1Schema>;
+type Step1Fields = Partial<z.infer<typeof Step1Schema>>;
 
 export default function Step1({ setFormData, formData, setCurrentStep }: any) {
   const {
@@ -25,6 +23,11 @@ export default function Step1({ setFormData, formData, setCurrentStep }: any) {
     watch,
     formState: { errors, isValid },
   } = useForm<Step1Fields>({
+    defaultValues: {
+      name: formData.name || null,
+      email: formData.email || null,
+      phone: formData.phone?.toString() || null,
+    },
     resolver: zodResolver(Step1Schema),
   });
   const savedData: SubmitHandler<Step1Fields> = (data: any) => {
@@ -102,9 +105,6 @@ export default function Step1({ setFormData, formData, setCurrentStep }: any) {
       <div className="flex justify-end">
         <button
           type="submit"
-          // disabled={Object.values(watchInputs).some((value) => !value)}
-          // onClick={(e) => setCurrentStep((prev: any) => prev + 1)}
-          // (e) => setCurrentStep((prev: any) => prev + 1)
           className="flex text-base text-white bottom-0 rounded-md px-4 py-2 bg-marine-blue"
         >
           Next Step
