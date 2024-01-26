@@ -67,6 +67,12 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
   });
 
   const addOns = watch("addOns");
+
+  const sortedAddOns = addOns.sort((a, b) => {
+    const order = ["Online service", "Larger storage", "Customizable profile"];
+    return order.indexOf(a.name) - order.indexOf(b.name);
+  });
+
   const priceMapping = {
     "Online service": billing === "Monthly" ? "1" : "10",
     "Larger storage": billing === "Monthly" ? "2" : "20",
@@ -75,7 +81,7 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
 
   const savedData: SubmitHandler<Step3Fields> = (data: any) => {
     setFormData({ ...formData, ...data });
-    setCurrentStep((prev: number) => prev + 1);
+    // setCurrentStep((prev: number) => prev + 1);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,7 +108,7 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
       remove(index);
     }
   };
-  register("addOns");
+  register("addOns", { value: sortedAddOns });
 
   return (
     <>
@@ -123,7 +129,7 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
 
         <div>
           <label
-            htmlFor="online"
+            htmlFor="Online service"
             className="flex checkbox-label rounded-md outline outline-1 outline-light-gray "
           >
             <div className="flex items-center p-3 gap-x-2 w-full">
@@ -151,7 +157,7 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
         </div>
         <div>
           <label
-            htmlFor="online"
+            htmlFor="Larger storage"
             className="flex checkbox-label rounded-md outline outline-1 outline-light-gray "
           >
             <div className="flex items-center p-3 gap-x-2 gap- w-full">
@@ -179,7 +185,7 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
         </div>
         <div>
           <label
-            htmlFor="online"
+            htmlFor="Customizable profile"
             className="flex checkbox-label rounded-md outline outline-1 outline-light-gray "
           >
             <div className="flex items-center p-3 gap-x-2 w-full">
