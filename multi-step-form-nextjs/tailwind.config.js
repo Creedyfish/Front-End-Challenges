@@ -25,7 +25,7 @@ module.exports = {
         xs: "376px",
       },
       boxShadow: {
-        "3xl": "0 25px 60px -20px rgba(0, 0, 0, 0.3)",
+        "3xl": "0 30px 75px -15px rgba(0, 0, 0, 0.3)",
       },
       gridAutoColumns: {
         least: "min-content",

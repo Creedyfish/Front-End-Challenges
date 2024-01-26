@@ -17,7 +17,7 @@ export const Step3Schema = z.object({
         price: z.enum(["2", "20"]),
       }),
       z.object({
-        name: z.literal("Customizable Storage"),
+        name: z.literal("Customizable profile"),
         price: z.enum(["2", "20"]),
       }),
     ])
@@ -27,7 +27,7 @@ export const Step3Schema = z.object({
 type Step3Fields = z.infer<typeof Step3Schema>;
 
 export default function Step3({ setFormData, formData, setCurrentStep }: any) {
-  const billing = formData.billing || "Yearly";
+  const billing = formData.billing || "Monthly";
   const {
     register,
     handleSubmit,
@@ -39,26 +39,39 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
     formState: { errors, isValid },
   } = useForm<Step3Fields>({
     defaultValues: {
-      // addOns: [
-      //   {
-      //     name: "Online service",
-      //     price: billing === "Monthly" ? "1" : "10",
-      //   },
-      //   {
-      //     name: "Larger storage",
-      //     price: billing === "Monthly" ? "2" : "20",
-      //   },
-      // ],
+      addOns: formData.addOns || [
+        {
+          name: "Online service",
+          price: billing === "Monthly" ? "1" : "10",
+        },
+        {
+          name: "Larger storage",
+          price: billing === "Monthly" ? "2" : "20",
+        },
+      ],
     },
     resolver: zodResolver(Step3Schema),
   });
-
-  const { fields, append, remove } = useFieldArray({
+  const online = watch("addOns")?.some(
+    (addOn) => addOn.name === "Online service"
+  );
+  const larger = watch("addOns")?.some(
+    (addOn) => addOn.name === "Larger storage"
+  );
+  const custom = watch("addOns")?.some(
+    (addOn) => addOn.name === "Customizable profile"
+  );
+  const { fields, append, remove, insert } = useFieldArray({
     control,
     name: "addOns",
   });
 
   const addOns = watch("addOns");
+  const priceMapping = {
+    "Online service": billing === "Monthly" ? "1" : "10",
+    "Larger storage": billing === "Monthly" ? "2" : "20",
+    "Customizable profile": billing === "Monthly" ? "2" : "20",
+  };
 
   const savedData: SubmitHandler<Step3Fields> = (data: any) => {
     setFormData({ ...formData, ...data });
@@ -66,30 +79,46 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const index = addOns?.findIndex((addOn) => addOn.name === e.target.id) || 0;
     if (e.target.checked) {
-      append({
-        name: e.target.id,
-        price: billing === "Monthly" ? "1" : "10",
-      });
+      if (e.target.id === "Online service") {
+        append({
+          name: "Online service",
+          price: priceMapping["Online service"] as "1" | "10",
+        });
+      } else if (e.target.id === "Larger storage") {
+        append({
+          name: "Larger storage",
+          price: priceMapping["Larger storage"] as "2" | "20",
+        });
+      } else if (e.target.id === "Customizable profile") {
+        append({
+          name: "Customizable profile",
+          price: priceMapping["Customizable profile"] as "2" | "20",
+        });
+      }
     } else {
+      const index =
+        addOns?.findIndex((addOn) => addOn.name === e.target.id) || 0;
       remove(index);
     }
   };
-
-  console.log(addOns);
+  register("addOns");
 
   return (
     <>
       <form
+        id="step3"
         className="bg-white flex flex-col rounded-md px-6 py-6 -translate-y-24 shadow-light-blue shadow-3xl gap-4"
         onSubmit={handleSubmit(savedData)}
       >
-        <div className="flex text-2xl font-bold text-marine-blue">
-          Pick add-ons
-        </div>
-        <div className="flex text-cool-gray">
-          Add-ons help enhance your gaming experience.
+        <div className="flex flex-col">
+          {" "}
+          <div className="flex text-2xl font-bold text-marine-blue">
+            Pick add-ons
+          </div>
+          <div className="flex text-cool-gray">
+            Add-ons help enhance your gaming experience.
+          </div>
         </div>
 
         <div>
@@ -97,24 +126,26 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
             htmlFor="online"
             className="flex checkbox-label rounded-md outline outline-1 outline-light-gray "
           >
-            <div className="flex items-center p-3 gap-x-3">
-              <div className="flex items-center">
+            <div className="flex items-center p-3 gap-x-2 w-full">
+              <div className="flex items-center ">
                 <input
-                  {...register("addOns", { value: [] })}
                   name="addOns"
                   id="Online service"
                   className="rounded-checkbox checked:accent-purplish-blue w-5 h-5 border-[1px] border-light-gray border-solid"
                   type="checkbox"
                   onChange={handleChange}
+                  checked={online}
                 />
               </div>
-              <div className=" ">
+              <div className=" flex flex-col w-full">
                 <div className="font-bold text-marine-blue">Online service</div>
                 <div className="text-sm text-cool-gray">
                   <div className="">Access to multiplayer games</div>
                 </div>
               </div>
-              <div className="text-purplish-blue text-sm">sdasd</div>
+              <div className="text-purplish-blue text-sm">
+                +${billing === "Monthly" ? "1/mo" : "10/yr"}
+              </div>
             </div>
           </label>
         </div>
@@ -123,37 +154,76 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
             htmlFor="online"
             className="flex checkbox-label rounded-md outline outline-1 outline-light-gray "
           >
-            <div className="flex items-center p-3 gap-x-3">
-              <div className="flex items-center">
+            <div className="flex items-center p-3 gap-x-2 gap- w-full">
+              <div className="flex items-center ">
                 <input
-                  {...register("addOns", { value: [] })}
                   name="addOns"
                   id="Larger storage"
                   className="rounded-checkbox checked:accent-purplish-blue w-5 h-5 border-[1px] border-light-gray border-solid"
                   type="checkbox"
                   onChange={handleChange}
+                  checked={larger}
                 />
               </div>
-              <div className=" ">
+              <div className=" flex flex-col w-full">
                 <div className="font-bold text-marine-blue">Larger storage</div>
                 <div className="text-sm text-cool-gray">
-                  <div className="">Access to multiplayer games</div>
+                  <div className="">Extra 1TB of cloud save</div>
                 </div>
               </div>
-              <div className="text-purplish-blue text-sm">sdasd</div>
+              <div className="text-purplish-blue text-sm">
+                +${billing === "Monthly" ? "2/mo" : "20/yr"}
+              </div>
             </div>
           </label>
         </div>
-        <div className="flex justify-end">
-          <button
-            type="submit"
-            className="flex text-base text-white bottom-0 rounded-md px-4 py-2 bg-marine-blue"
+        <div>
+          <label
+            htmlFor="online"
+            className="flex checkbox-label rounded-md outline outline-1 outline-light-gray "
           >
-            Next Step
-          </button>
+            <div className="flex items-center p-3 gap-x-2 w-full">
+              <div className="flex items-center ">
+                <input
+                  name="addOns"
+                  id="Customizable profile"
+                  className="rounded-checkbox checked:accent-purplish-blue w-5 h-5 border-[1px] border-light-gray border-solid"
+                  type="checkbox"
+                  onChange={handleChange}
+                  checked={custom}
+                />
+              </div>
+              <div className="flex flex-col w-full">
+                <div className="font-bold text-marine-blue">
+                  Customizable profile
+                </div>
+                <div className="text-sm text-cool-gray">
+                  <div className="">Custom theme on your profile</div>
+                </div>
+              </div>
+              <div className="text-purplish-blue text-sm ">
+                +${billing === "Monthly" ? "2mo" : "20/yr"}
+              </div>
+            </div>
+          </label>
         </div>
       </form>
-      <DevTool control={control} />
+      <div className="w-full flex justify-between">
+        <button
+          type="button"
+          onClick={(e) => setCurrentStep((prev: any) => prev - 1)}
+          className="flex font-medium text-sm text-cool-gray bottom-0 rounded-md px-4 py-2 "
+        >
+          Go Back
+        </button>
+        <button
+          type="submit"
+          form="step3"
+          className="flex text-sm font-medium text-white bottom-0 rounded-md px-4 py-2 bg-marine-blue"
+        >
+          Next Step
+        </button>
+      </div>
     </>
   );
 }

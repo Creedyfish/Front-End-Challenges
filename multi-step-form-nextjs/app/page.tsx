@@ -9,7 +9,8 @@ import { DevTool } from "@hookform/devtools";
 import Step1 from "./components/Step1";
 import Step2 from "./components/Step2";
 import Step3 from "./components/Step3";
-function page() {
+
+export default function page() {
   const steps = [1, 2, 3, 4];
   const [formData, setFormData] = useState({});
   const [currentStep, setCurrentStep] = useState(3);
@@ -74,7 +75,6 @@ function page() {
   );
 }
 
-export default page;
 // import Step1 from "./components/Step1";
 // import Step2 from "./components/Step2";
 // import Step3 from "./components/Step3";

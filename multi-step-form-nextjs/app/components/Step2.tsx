@@ -63,13 +63,12 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue("billing", e.target.checked ? "Yearly" : "Monthly");
-    // setValue("price", 90);
   };
   register("billing");
   useEffect(() => {
     calculatePrice({ billing, plan });
   }, [billing, plan]);
-  console.log(price);
+
   return (
     <>
       <div className="relative">
