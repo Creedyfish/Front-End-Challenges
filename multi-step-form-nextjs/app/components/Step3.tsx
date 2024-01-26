@@ -81,7 +81,7 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
 
   const savedData: SubmitHandler<Step3Fields> = (data: any) => {
     setFormData({ ...formData, ...data });
-    // setCurrentStep((prev: number) => prev + 1);
+    setCurrentStep((prev: number) => prev + 1);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -144,7 +144,9 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
                 />
               </div>
               <div className=" flex flex-col w-full">
-                <div className="font-bold text-marine-blue">Online service</div>
+                <div className="font-bold  text-marine-blue">
+                  Online service
+                </div>
                 <div className="text-sm text-cool-gray">
                   <div className="">Access to multiplayer games</div>
                 </div>
