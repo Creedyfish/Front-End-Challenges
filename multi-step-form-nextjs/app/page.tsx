@@ -12,10 +12,10 @@ import Step3 from "./components/Step3";
 function page() {
   const steps = [1, 2, 3, 4];
   const [formData, setFormData] = useState({});
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(3);
   console.log(formData);
   return (
-    <main className="flex text-base h-full w-full xs:justify-center xs:items-center min-w-[375px]">
+    <main className="flex text-base h-full w-full xs:justify-center xs:items-center min-w-[376px]">
       <div className="xs:p-10 p-0 xs:flex relative">
         <div className="absolute flex w-full justify-center items-center gap-5 p-6 text-white font-medium">
           {steps.map((step) => (
