@@ -25,7 +25,7 @@ export default function Page() {
   // The component returns a JSX element
   return (
     <main className="flex h-full w-full min-w-[376px] text-base xs:min-w-[800px] xs:items-center xs:justify-center">
-      <div className="0 rounded-lg bg-white xs:flex xs:p-4 xs:shadow-2xl xs:shadow-light-blue xs:drop-shadow-xl ">
+      <div className="rounded-lg bg-white xs:flex xs:p-4 xs:shadow-2xl xs:shadow-light-blue xs:drop-shadow-xl ">
         <div className="relative xs:w-[30%]">
           <div className="absolute flex w-full items-center justify-center gap-4 p-8 font-medium text-white xs:flex-col xs:items-start">
             {Object.entries(steps).map(([step, value]) => (
