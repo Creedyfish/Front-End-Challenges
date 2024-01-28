@@ -1,22 +1,26 @@
+// Importing necessary libraries and components
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DevTool } from "@hookform/devtools";
 import { useEffect } from "react";
 
+// Defining the validation schema for Step 2 using zod
 export const Step2Schema = z.object({
   plan: z.enum(["Arcade", "Advanced", "Pro"]),
   billing: z.enum(["Monthly", "Yearly"]),
   price: z.number(),
 });
 
+// Defining the type for the fields in Step 2
 type Step2Fields = z.infer<typeof Step2Schema>;
 type fields = {
   plan: "Arcade" | "Advanced" | "Pro";
   billing: "Monthly" | "Yearly";
 };
 
+// Step2 component
 export default function Step2({ setFormData, formData, setCurrentStep }: any) {
+  // Initializing the form with react-hook-form
   const {
     register,
     handleSubmit,
@@ -31,13 +35,15 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
       billing: formData.billing || "Monthly",
       price: 9,
     },
-    resolver: zodResolver(Step2Schema),
+    resolver: zodResolver(Step2Schema), // Using zod for form validation
   });
+  // Watching the values of the plan, billing, and price fields
   const plan = watch("plan");
   const billing = watch("billing");
   const price = watch("price");
-
+  // Function to calculate the price based on the selected plan and billing cycle
   const calculatePrice = ({ plan, billing }: fields) => {
+    // Defining the price for each plan and billing cycle
     const prices = {
       Arcade: {
         Monthly: 9,
@@ -55,16 +61,17 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
 
     return setValue("price", prices[plan][billing]);
   };
-
+  // Function to handle form submission
   const savedData: SubmitHandler<Step2Fields> = (data: any) => {
     setFormData({ ...formData, ...data });
     setCurrentStep((prev: number) => prev + 1);
   };
-
+  // Function to handle changes in the billing cycle
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue("billing", e.target.checked ? "Yearly" : "Monthly");
   };
   register("billing");
+  // Using useEffect to recalculate the price whenever the plan or billing cycle changes
   useEffect(() => {
     calculatePrice({ billing, plan });
   }, [billing, plan]);

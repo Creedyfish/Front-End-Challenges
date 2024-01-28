@@ -1,28 +1,28 @@
 "use client";
+// Importing necessary libraries and components
 import React from "react";
 import { useState } from "react";
 import Image from "next/image";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { DevTool } from "@hookform/devtools";
 import Step1 from "./components/Step1";
 import Step2 from "./components/Step2";
 import Step3 from "./components/Step3";
 import Step4 from "./components/Step4";
-
+// Page component
 export default function Page() {
+  // Defining the steps of the process
   const steps = {
     1: "YOUR INFO",
     2: "SELECT PLAN",
     3: "ADD-ONS",
     4: "SUMMARY",
   };
+  // Using useState to manage the form data, the final state, and the current step
   const [formData, setFormData] = useState({});
   const [final, setFinal] = useState(false);
-
   const [currentStep, setCurrentStep] = useState(1);
+  // Logging the form data to the console
   console.log(formData);
+  // The component returns a JSX element
   return (
     <main className="flex h-full w-full min-w-[376px] text-base xs:min-w-[800px] xs:items-center xs:justify-center">
       <div className="0 rounded-lg bg-white xs:flex xs:p-4 xs:shadow-2xl xs:shadow-light-blue xs:drop-shadow-xl ">

@@ -1,10 +1,11 @@
+// Importing necessary libraries and components
 import React from "react";
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DevTool } from "@hookform/devtools";
 import { useEffect } from "react";
-
+// Defining the validation schema for Step 3 using zod
 export const Step3Schema = z.object({
   addOns: z.array(
     z.union([
@@ -23,12 +24,14 @@ export const Step3Schema = z.object({
     ]),
   ),
 });
-
+// Defining the type for the fields in Step 3
 type Step3Fields = z.infer<typeof Step3Schema>;
-
+// Step3 component
 export default function Step3({ setFormData, formData, setCurrentStep }: any) {
+  // Getting the billing cycle from formData
   const billing = formData.billing || "Monthly";
-  const test = formData.addOns?.map((addOn: any) => {
+  // Mapping over the addOns in formData to get the price for each addOn;
+  const savedAddOn = formData.addOns?.map((addOn: any) => {
     let price;
     switch (addOn.name) {
       case "Online service":
@@ -44,9 +47,9 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
       default:
         price = addOn.price; // If the addOn name doesn't match any cases, keep the current price
     }
-    return { ...addOn, price };
+    return { ...addOn, price }; // Return the addOn with the updated price
   });
-
+  // Initializing the form with react-hook-form
   const {
     register,
     handleSubmit,
@@ -58,7 +61,8 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
     formState: { errors, isValid },
   } = useForm<Step3Fields>({
     defaultValues: {
-      addOns: test || [
+      // Setting the default values for the addOns field
+      addOns: savedAddOn || [
         {
           name: "Online service",
           price: billing === "Monthly" ? "1" : "10",
@@ -69,8 +73,10 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
         },
       ],
     },
-    resolver: zodResolver(Step3Schema),
+    resolver: zodResolver(Step3Schema), // Using zod for form validation
   });
+  // Watching the addOns field and checking if it includes specific add-ons
+
   const online = watch("addOns")?.some(
     (addOn) => addOn.name === "Online service",
   );
@@ -80,29 +86,30 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
   const custom = watch("addOns")?.some(
     (addOn) => addOn.name === "Customizable profile",
   );
+  // Using useFieldArray to manage the addOns field
   const { fields, append, remove, insert } = useFieldArray({
     control,
     name: "addOns",
   });
-
+  // Watching the addOns field
   const addOns = watch("addOns");
-
+  // Sorting the addOns based on a specific order
   const sortedAddOns = addOns.sort((a, b) => {
     const order = ["Online service", "Larger storage", "Customizable profile"];
     return order.indexOf(a.name) - order.indexOf(b.name);
   });
-
+  // Mapping the addOn names to their prices
   const priceMapping = {
     "Online service": billing === "Monthly" ? "1" : "10",
     "Larger storage": billing === "Monthly" ? "2" : "20",
     "Customizable profile": billing === "Monthly" ? "2" : "20",
   };
-
+  // Function to save the form data and go to the next step
   const savedData: SubmitHandler<Step3Fields> = (data: any) => {
     setFormData({ ...formData, ...data });
     setCurrentStep((prev: number) => prev + 1);
   };
-
+  // Function to handle changes in the addOns field
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       if (e.target.id === "Online service") {
@@ -122,6 +129,7 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
         });
       }
     } else {
+      // If the checkbox is unchecked, remove the corresponding addOn from the addOns field
       const index =
         addOns?.findIndex((addOn) => addOn.name === e.target.id) || 0;
       remove(index);

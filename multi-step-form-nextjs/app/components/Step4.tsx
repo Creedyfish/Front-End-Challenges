@@ -1,10 +1,10 @@
+// If the checkbox is unchecked, remove the corresponding addOn from the addOns field
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DevTool } from "@hookform/devtools";
 import Step5 from "./Step5";
-// type Step4Fields = Partial<z.infer<typeof Step4Schema>>;
-
+// Step4 component
 export default function Step4({
   setFormData,
   formData,
@@ -12,17 +12,20 @@ export default function Step4({
   setFinal,
   final,
 }: any) {
+  // Getting the billing cycle from formData and setting the billing unit
   const billing = formData.billing === "Yearly" ? "/yr" : "/mo";
+  // Calculating the total price by adding the price of each addOn to the base price
   const total =
     formData.addOns?.reduce(
       (sum: number, addOn: { price: string }) => sum + Number(addOn.price),
       0,
     ) + formData.price;
+  // Function to save the total price to formData and set final to true
   const savedData = () => {
     setFormData({ ...formData, total });
     setFinal(() => true);
   };
-
+  // The component returns a JSX element
   return (
     <>
       {!final ? (
