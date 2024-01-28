@@ -18,12 +18,19 @@ export default function Step4({
       (sum: number, addOn: { price: string }) => sum + Number(addOn.price),
       0
     ) + formData.price;
+  const savedData = () => {
+    setFormData({ ...formData, total });
+    setFinal(() => true);
+  };
 
   return (
     <>
       {!final ? (
         <>
-          <div id="step1" className="bg-white h-full flex flex-col    ">
+          <div
+            id="step1"
+            className="bg-white h-full flex flex-col xs:min-w-[440px] "
+          >
             <div className="shadow-light-blue flex flex-col shadow-3xl rounded-lg gap-4  py-8 px-4 xs:p-0 xs:pt-4 -translate-y-24 xs:translate-y-0 xs:shadow-none bg-white">
               <div className="flex flex-col">
                 <div className="flex text-2xl font-bold text-marine-blue">
@@ -98,7 +105,7 @@ export default function Step4({
                 </button>
                 <button
                   type="button"
-                  onClick={() => setFinal(() => true)}
+                  onClick={savedData}
                   className="flex text-base text-white bottom-0 rounded-md px-6 py-2 bg-purplish-blue"
                 >
                   Confirm

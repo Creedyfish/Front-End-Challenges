@@ -41,7 +41,7 @@ export default function Step1({ setFormData, formData, setCurrentStep }: any) {
     <>
       <form
         id="step1"
-        className="bg-white h-full flex flex-col     "
+        className="bg-white h-full flex flex-col xs:min-w-[440px] "
         onSubmit={handleSubmit(savedData)}
       >
         <div className="shadow-light-blue flex flex-col shadow-3xl rounded-lg gap-4  py-8 px-4 xs:p-0 xs:pt-4 -translate-y-24 xs:translate-y-0 xs:shadow-none bg-white">

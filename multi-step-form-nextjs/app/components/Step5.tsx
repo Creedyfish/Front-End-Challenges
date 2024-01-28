@@ -8,8 +8,8 @@ import { DevTool } from "@hookform/devtools";
 export default function Step5({ setFormData, formData, setCurrentStep }: any) {
   return (
     <>
-      <div className="bg-white h-full flex flex-col relative max-w-[383px]">
-        <div className="h-full justify-center items-center flex flex-col shadow-3xl shadow-light-blue rounded-lg gap-4  py-8 px-4 xs:p-0 xs:pt-4 -translate-y-24 xs:translate-y-0 xs:shadow-none bg-white">
+      <div className="bg-white h-full flex flex-col relative xs:max-w-[440px]">
+        <div className="h-full justify-center items-center flex flex-col shadow-3xl shadow-light-blue rounded-lg gap-4  py-20 xs:py-8 px-4 xs:p-0 xs:pt-4 -translate-y-24 xs:translate-y-0 xs:shadow-none bg-white">
           <div className="p-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"

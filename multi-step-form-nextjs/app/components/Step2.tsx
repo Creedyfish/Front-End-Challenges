@@ -33,6 +33,9 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
     },
     resolver: zodResolver(Step2Schema),
   });
+  const plan = watch("plan");
+  const billing = watch("billing");
+  const price = watch("price");
 
   const calculatePrice = ({ plan, billing }: fields) => {
     const prices = {
@@ -53,9 +56,6 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
     return setValue("price", prices[plan][billing]);
   };
 
-  const plan = watch("plan");
-  const billing = watch("billing");
-  const price = watch("price");
   const savedData: SubmitHandler<Step2Fields> = (data: any) => {
     setFormData({ ...formData, ...data });
     setCurrentStep((prev: number) => prev + 1);
@@ -68,12 +68,11 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
   useEffect(() => {
     calculatePrice({ billing, plan });
   }, [billing, plan]);
-
   return (
     <>
       <form
         id="step2"
-        className="bg-white h-full flex flex-col relative     "
+        className="bg-white h-full flex flex-col relative xs:min-w-[440px]   "
         onSubmit={handleSubmit(savedData)}
       >
         <div className="h-full shadow-light-blue flex flex-col shadow-3xl rounded-lg gap-4  py-8 px-4 xs:p-0 xs:pt-4 -translate-y-24 xs:translate-y-0 xs:shadow-none bg-white">
@@ -88,7 +87,7 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
           <div className="flex flex-col xs:grid xs:grid-cols-3 gap-2 h-full">
             <div className="">
               <input
-                {...register("plan", { required: true })}
+                {...register("plan")}
                 name="plan"
                 id="arcade"
                 className="peer hidden"

@@ -128,42 +128,14 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
     }
   };
 
-  // useEffect(() => {
-  //   {
-  //     formData.addOns
-  //       ? setValue("addOns",setFormData((prevFormData: any) => ({
-  //         ...prevFormData,
-  //         addOns: prevFormData.addOns?.map((addOn: any) => {
-  //           let price;
-  //           switch (addOn.name) {
-  //             case "Online service":
-  //               price = billing === "Monthly" ? "1" : "10";
-  //               break;
-  //             case "Larger storage":
-  //               price = billing === "Monthly" ? "2" : "20";
-  //               break;
-
-  //             default:
-  //               price = addOn.price;
-  //           }
-  //           return { ...addOn, price };
-  //         }),
-  //       })))
-  //       : null;
-  //   }
-  //
-  //
-  // }, [billing]);
-  // register("addOns", { value: sortedAddOns });
-  // console.log(watch("addOns"));
   return (
     <>
       <form
         id="step3"
-        className="bg-white h-full flex flex-col     "
+        className="bg-white h-full flex flex-col xs:min-w-[440px]   "
         onSubmit={handleSubmit(savedData)}
       >
-        <div className="shadow-light-blue flex flex-col shadow-3xl rounded-lg gap-4  py-8 px-4 xs:p-0 xs:pt-4 -translate-y-24 xs:translate-y-0 xs:shadow-none bg-white">
+        <div className=" flex flex-col shadow-3xl shadow-light-blue rounded-lg gap-4  py-8 px-4 xs:p-0 xs:pt-4 -translate-y-24 xs:translate-y-0 xs:shadow-none bg-white">
           <div className="flex flex-col">
             {" "}
             <div className="flex text-2xl font-bold text-marine-blue">

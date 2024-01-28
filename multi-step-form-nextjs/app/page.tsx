@@ -24,13 +24,13 @@ export default function Page() {
   console.log(formData);
   return (
     <main className="flex text-base h-full w-full xs:justify-center xs:items-center min-w-[376px] xs:min-w-[800px]">
-      <div className="xs:p-4 0 xs:flex bg-white rounded-lg  border-2">
+      <div className="xs:p-4 0 xs:flex bg-white rounded-lg xs:shadow-2xl xs:drop-shadow-xl xs:shadow-light-blue ">
         <div className="relative xs:w-[30%]">
           <div className="absolute flex xs:flex-col xs:items-start w-full justify-center items-center gap-4 p-8 text-white font-medium">
             {Object.entries(steps).map(([step, value]) => (
               <div key={step} className="flex items-center gap-4">
                 <div
-                  className={`rounded-full text-sm border-[1px] w-8 h-8 flex items-center justify-center text-center ${
+                  className={`rounded-full text-sm border-[1px] w-8 h-8 flex items-center justify-center text-center select-none ${
                     Number(step) === currentStep
                       ? "bg-light-blue text-marine-blue border-light-blue"
                       : ""
