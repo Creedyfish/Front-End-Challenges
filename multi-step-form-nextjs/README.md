@@ -36,16 +36,16 @@ Users should be able to:
 
 ### Screenshot
 
-![Step 1 - Desktop](/Frontend-Mentor-Multi-step-form-step1-desktop.png)
-![Step 2 - Desktop](/Frontend-Mentor-Multi-step-form-step2-desktop.png)
-![Step 3 - Desktop](/Frontend-Mentor-Multi-step-form-step3-desktop.png)
-![Step 4 - Desktop](/Frontend-Mentor-Multi-step-form-step4-desktop.png)
-![Step 5 - Desktop](/Frontend-Mentor-Multi-step-form-step5-desktop.png)
-![Step 1 - Mobile](/Frontend-Mentor-Multi-step-form-step1-mobile.png)
-![Step 2 - Mobile](/Frontend-Mentor-Multi-step-form-step2-mobile.png)
-![Step 3 - Mobile](/Frontend-Mentor-Multi-step-form-step3-mobile.png)
-![Step 4 - Mobile](/Frontend-Mentor-Multi-step-form-step4-mobile.png)
-![Step 5 - Mobile](/Frontend-Mentor-Multi-step-form-step5-mobile.png)
+![Step 1 - Desktop](public/Frontend-Mentor-Multi-step-form-step1-desktop.png)
+![Step 2 - Desktop](public/Frontend-Mentor-Multi-step-form-step2-desktop.png)
+![Step 3 - Desktop](public/Frontend-Mentor-Multi-step-form-step3-desktop.png)
+![Step 4 - Desktop](public/Frontend-Mentor-Multi-step-form-step4-desktop.png)
+![Step 5 - Desktop](public/Frontend-Mentor-Multi-step-form-step5-desktop.png)
+![Step 1 - Mobile](public/Frontend-Mentor-Multi-step-form-step1-mobile.png)
+![Step 2 - Mobile](public/Frontend-Mentor-Multi-step-form-step2-mobile.png)
+![Step 3 - Mobile](public/Frontend-Mentor-Multi-step-form-step3-mobile.png)
+![Step 4 - Mobile](public/Frontend-Mentor-Multi-step-form-step4-mobile.png)
+![Step 5 - Mobile](public/Frontend-Mentor-Multi-step-form-step5-mobile.png)
 
 ### Links
 
