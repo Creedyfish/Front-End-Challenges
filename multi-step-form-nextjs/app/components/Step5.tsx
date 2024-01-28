@@ -61,8 +61,8 @@ export default function Step5({ setFormData, formData, setCurrentStep }: any) {
                 <div className="flex gap-2 text-cool-gray text-sm">
                   Addons:
                   <div className="flex flex-col text-marine-blue font-medium text-base">
-                    {formData.addOns.map((addOn: any) => (
-                      <div className="flex justify-between gap-4">
+                    {formData.addOns.map((addOn: any, index: number) => (
+                      <div key={index} className="flex justify-between gap-4">
                         <div>{addOn.name} </div>
                         <div>
                           ${addOn.price}
