@@ -16,7 +16,7 @@ export default function Step4({
   const total =
     formData.addOns?.reduce(
       (sum: number, addOn: { price: string }) => sum + Number(addOn.price),
-      0
+      0,
     ) + formData.price;
   const savedData = () => {
     setFormData({ ...formData, total });
@@ -29,9 +29,9 @@ export default function Step4({
         <>
           <div
             id="step1"
-            className="bg-white h-full flex flex-col xs:min-w-[440px] "
+            className="flex h-full flex-col bg-white xs:min-w-[440px] "
           >
-            <div className="shadow-light-blue flex flex-col shadow-3xl rounded-lg gap-4  py-8 px-4 xs:p-0 xs:pt-4 -translate-y-24 xs:translate-y-0 xs:shadow-none bg-white">
+            <div className="flex -translate-y-24 flex-col gap-4 rounded-lg bg-white  px-4 py-8 shadow-3xl shadow-light-blue xs:translate-y-0 xs:p-0 xs:pt-4 xs:shadow-none">
               <div className="flex flex-col">
                 <div className="flex text-2xl font-bold text-marine-blue">
                   Finishing up
@@ -40,15 +40,15 @@ export default function Step4({
                   Double-check everything looks OK before confirming.
                 </div>
               </div>
-              <div className="p-4 flex flex-col gap-6 text-sm">
-                <div className=" pb-3 justify-between items-center flex border-b-[2px]">
+              <div className="flex flex-col gap-6 p-4 text-sm">
+                <div className=" flex items-center justify-between border-b-[2px] pb-3">
                   <div className="flex flex-col ">
-                    <div className="text-marine-blue font-bold">
+                    <div className="font-bold text-marine-blue">
                       {formData.plan} {`(${formData.billing})`}
                     </div>
                     <div className=" font-medium text-cool-gray">
                       <button
-                        className="hover:text-purplish-blue underline"
+                        className="underline hover:text-purplish-blue"
                         onClick={(e) => {
                           setCurrentStep(2);
                         }}
@@ -67,20 +67,20 @@ export default function Step4({
                     (addOn: { name: string; price: string }, index: number) => (
                       <div
                         key={index}
-                        className="flex justify-between items-center"
+                        className="flex items-center justify-between"
                       >
                         <div className="text-sm text-cool-gray">
                           {addOn.name}
                         </div>
-                        <div className=" text-marine-blue font-medium">
+                        <div className=" font-medium text-marine-blue">
                           +${addOn.price}
                           {billing}
                         </div>
                       </div>
-                    )
+                    ),
                   )}
                 </div>
-                <div className="flex justify-between items-center text-cool-gray pt-2">
+                <div className="flex items-center justify-between pt-2 text-cool-gray">
                   <div>
                     Total{" "}
                     {`(${
@@ -95,18 +95,18 @@ export default function Step4({
               </div>
             </div>
 
-            <div className="flex w-full h-full justify-end  ">
-              <div className="flex items-end justify-between w-full ">
+            <div className="flex h-full w-full justify-end  ">
+              <div className="flex w-full items-end justify-between ">
                 <button
                   onClick={() => setCurrentStep((prev: any) => prev - 1)}
-                  className="flex font-medium text-sm text-cool-gray bottom-0 rounded-md px-4 py-2 "
+                  className="bottom-0 flex rounded-md px-4 py-2 text-sm font-medium text-cool-gray "
                 >
                   Go Back
                 </button>
                 <button
                   type="button"
                   onClick={savedData}
-                  className="flex text-base text-white bottom-0 rounded-md px-6 py-2 bg-purplish-blue"
+                  className="bottom-0 flex rounded-md bg-purplish-blue px-6 py-2 text-base text-white"
                 >
                   Confirm
                 </button>

@@ -20,7 +20,7 @@ export const Step3Schema = z.object({
         name: z.literal("Customizable profile"),
         price: z.enum(["2", "20"]),
       }),
-    ])
+    ]),
   ),
 });
 
@@ -72,13 +72,13 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
     resolver: zodResolver(Step3Schema),
   });
   const online = watch("addOns")?.some(
-    (addOn) => addOn.name === "Online service"
+    (addOn) => addOn.name === "Online service",
   );
   const larger = watch("addOns")?.some(
-    (addOn) => addOn.name === "Larger storage"
+    (addOn) => addOn.name === "Larger storage",
   );
   const custom = watch("addOns")?.some(
-    (addOn) => addOn.name === "Customizable profile"
+    (addOn) => addOn.name === "Customizable profile",
   );
   const { fields, append, remove, insert } = useFieldArray({
     control,
@@ -132,10 +132,10 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
     <>
       <form
         id="step3"
-        className="bg-white h-full flex flex-col xs:min-w-[440px]   "
+        className="flex h-full flex-col bg-white xs:min-w-[440px]   "
         onSubmit={handleSubmit(savedData)}
       >
-        <div className=" flex flex-col shadow-3xl shadow-light-blue rounded-lg gap-4  py-8 px-4 xs:p-0 xs:pt-4 -translate-y-24 xs:translate-y-0 xs:shadow-none bg-white">
+        <div className=" flex -translate-y-24 flex-col gap-4 rounded-lg bg-white  px-4 py-8 shadow-3xl shadow-light-blue xs:translate-y-0 xs:p-0 xs:pt-4 xs:shadow-none">
           <div className="flex flex-col">
             {" "}
             <div className="flex text-2xl font-bold text-marine-blue">
@@ -149,20 +149,20 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
           <div>
             <label
               htmlFor="Online service"
-              className="flex checkbox-label rounded-md outline outline-1 outline-light-gray "
+              className="checkbox-label flex rounded-md outline outline-1 outline-light-gray "
             >
-              <div className="flex items-center p-3 gap-x-2 w-full">
+              <div className="flex w-full items-center gap-x-2 p-3">
                 <div className="flex items-center ">
                   <input
                     name="addOns"
                     id="Online service"
-                    className="rounded-checkbox checked:accent-purplish-blue w-5 h-5 border-[1px] border-light-gray border-solid"
+                    className="rounded-checkbox h-5 w-5 border-[1px] border-solid border-light-gray checked:accent-purplish-blue"
                     type="checkbox"
                     onChange={handleChange}
                     checked={online}
                   />
                 </div>
-                <div className=" flex flex-col w-full">
+                <div className=" flex w-full flex-col">
                   <div className="font-bold  text-marine-blue">
                     Online service
                   </div>
@@ -170,7 +170,7 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
                     <div className="">Access to multiplayer games</div>
                   </div>
                 </div>
-                <div className="text-purplish-blue text-sm">
+                <div className="text-sm text-purplish-blue">
                   +${billing === "Monthly" ? "1/mo" : "10/yr"}
                 </div>
               </div>
@@ -179,20 +179,20 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
           <div>
             <label
               htmlFor="Larger storage"
-              className="flex checkbox-label rounded-md outline outline-1 outline-light-gray "
+              className="checkbox-label flex rounded-md outline outline-1 outline-light-gray "
             >
-              <div className="flex items-center p-3 gap-x-2 gap- w-full">
+              <div className="gap- flex w-full items-center gap-x-2 p-3">
                 <div className="flex items-center ">
                   <input
                     name="addOns"
                     id="Larger storage"
-                    className="rounded-checkbox checked:accent-purplish-blue w-5 h-5 border-[1px] border-light-gray border-solid"
+                    className="rounded-checkbox h-5 w-5 border-[1px] border-solid border-light-gray checked:accent-purplish-blue"
                     type="checkbox"
                     onChange={handleChange}
                     checked={larger}
                   />
                 </div>
-                <div className=" flex flex-col w-full">
+                <div className=" flex w-full flex-col">
                   <div className="font-bold text-marine-blue">
                     Larger storage
                   </div>
@@ -200,7 +200,7 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
                     <div className="">Extra 1TB of cloud save</div>
                   </div>
                 </div>
-                <div className="text-purplish-blue text-sm">
+                <div className="text-sm text-purplish-blue">
                   +${billing === "Monthly" ? "2/mo" : "20/yr"}
                 </div>
               </div>
@@ -209,20 +209,20 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
           <div>
             <label
               htmlFor="Customizable profile"
-              className="flex checkbox-label rounded-md outline outline-1 outline-light-gray "
+              className="checkbox-label flex rounded-md outline outline-1 outline-light-gray "
             >
-              <div className="flex items-center p-3 gap-x-2 w-full">
+              <div className="flex w-full items-center gap-x-2 p-3">
                 <div className="flex items-center ">
                   <input
                     name="addOns"
                     id="Customizable profile"
-                    className="rounded-checkbox checked:accent-purplish-blue w-5 h-5 border-[1px] border-light-gray border-solid"
+                    className="rounded-checkbox h-5 w-5 border-[1px] border-solid border-light-gray checked:accent-purplish-blue"
                     type="checkbox"
                     onChange={handleChange}
                     checked={custom}
                   />
                 </div>
-                <div className="flex flex-col w-full">
+                <div className="flex w-full flex-col">
                   <div className="font-bold text-marine-blue">
                     Customizable profile
                   </div>
@@ -230,26 +230,26 @@ export default function Step3({ setFormData, formData, setCurrentStep }: any) {
                     <div className="">Custom theme on your profile</div>
                   </div>
                 </div>
-                <div className="text-purplish-blue text-sm ">
+                <div className="text-sm text-purplish-blue ">
                   +${billing === "Monthly" ? "2mo" : "20/yr"}
                 </div>
               </div>
             </label>
           </div>
         </div>
-        <div className="flex w-full h-full justify-end items-end ">
-          <div className="w-full flex justify-between">
+        <div className="flex h-full w-full items-end justify-end ">
+          <div className="flex w-full justify-between">
             <button
               type="button"
               onClick={(e) => setCurrentStep((prev: any) => prev - 1)}
-              className="flex font-medium text-sm text-cool-gray bottom-0 rounded-md px-4 py-2 "
+              className="bottom-0 flex rounded-md px-4 py-2 text-sm font-medium text-cool-gray "
             >
               Go Back
             </button>
             <button
               type="submit"
               form="step3"
-              className="flex text-sm font-medium text-white bottom-0 rounded-md px-4 py-2 bg-marine-blue"
+              className="bottom-0 flex rounded-md bg-marine-blue px-4 py-2 text-sm font-medium text-white"
             >
               Next Step
             </button>

@@ -24,16 +24,16 @@ export default function Page() {
   const [currentStep, setCurrentStep] = useState(1);
   console.log(formData);
   return (
-    <main className="flex text-base h-full w-full xs:justify-center xs:items-center min-w-[376px] xs:min-w-[800px]">
-      <div className="xs:p-4 0 xs:flex bg-white rounded-lg xs:shadow-2xl xs:drop-shadow-xl xs:shadow-light-blue ">
+    <main className="flex h-full w-full min-w-[376px] text-base xs:min-w-[800px] xs:items-center xs:justify-center">
+      <div className="0 rounded-lg bg-white xs:flex xs:p-4 xs:shadow-2xl xs:shadow-light-blue xs:drop-shadow-xl ">
         <div className="relative xs:w-[30%]">
-          <div className="absolute flex xs:flex-col xs:items-start w-full justify-center items-center gap-4 p-8 text-white font-medium">
+          <div className="absolute flex w-full items-center justify-center gap-4 p-8 font-medium text-white xs:flex-col xs:items-start">
             {Object.entries(steps).map(([step, value]) => (
               <div key={step} className="flex items-center gap-4">
                 <div
-                  className={`rounded-full text-sm border-[1px] w-8 h-8 flex items-center justify-center text-center select-none ${
+                  className={`flex h-8 w-8 select-none items-center justify-center rounded-full border-[1px] text-center text-sm ${
                     Number(step) === currentStep
-                      ? "bg-light-blue text-marine-blue border-light-blue"
+                      ? "border-light-blue bg-light-blue text-marine-blue"
                       : ""
                   }`}
                 >
@@ -43,7 +43,7 @@ export default function Page() {
                   <div className="text-xs font-normal text-cool-gray">
                     STEP {step}
                   </div>
-                  <div className="text-sm font-medium text-white tracking-widest">
+                  <div className="text-sm font-medium tracking-widest text-white">
                     {value}
                   </div>
                 </div>
@@ -58,7 +58,7 @@ export default function Page() {
             alt="Mobile-SideBar"
           />
           <Image
-            className="xs:block hidden"
+            className="hidden xs:block"
             width={375}
             height={172}
             src={"images/bg-sidebar-desktop.svg"}
@@ -66,7 +66,7 @@ export default function Page() {
           />
         </div>
         <div className="xs:w-[70%]">
-          <div className="flex justify-center items-center w-full h-full  bg-white p-4">
+          <div className="flex h-full w-full items-center justify-center  bg-white p-4">
             {currentStep === 1 && (
               <Step1
                 setFormData={setFormData}

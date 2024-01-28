@@ -1,9 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DevTool } from "@hookform/devtools";
-import PhoneNumberInput from "./PhoneInput";
-
+// Defining the validation schema for Step 1 using zod
 export const Step1Schema = z.object({
   name: z.string().min(1, { message: "This Field is Required" }),
   email: z
@@ -15,10 +13,11 @@ export const Step1Schema = z.object({
     .min(1, { message: "This Field is Required" })
     .transform((data) => Number(data)),
 });
-
+// Defining the type for the fields in Step 1
 type Step1Fields = Partial<z.infer<typeof Step1Schema>>;
-
+// Step1 component
 export default function Step1({ setFormData, formData, setCurrentStep }: any) {
+  // Initializing the form with react-hook-form
   const {
     register,
     handleSubmit,
@@ -29,22 +28,23 @@ export default function Step1({ setFormData, formData, setCurrentStep }: any) {
     defaultValues: {
       name: formData.name,
       email: formData.email,
-      phone: formData.phone?.toString(),
+      phone: formData.phone?.toString(), // Setting the default values from formData
     },
-    resolver: zodResolver(Step1Schema),
+    resolver: zodResolver(Step1Schema), // Using zod for form validation
   });
+  // Function to handle form submission
   const savedData: SubmitHandler<Step1Fields> = (data: any) => {
-    setFormData({ ...formData, ...data });
-    setCurrentStep((prev: number) => prev + 1);
+    setFormData({ ...formData, ...data }); // Saving the form data
+    setCurrentStep((prev: number) => prev + 1); // Moving to the next step
   };
   return (
     <>
       <form
         id="step1"
-        className="bg-white h-full flex flex-col xs:min-w-[440px] "
+        className=" flex h-full flex-col bg-white xs:min-w-[440px]"
         onSubmit={handleSubmit(savedData)}
       >
-        <div className="shadow-light-blue flex flex-col shadow-3xl rounded-lg gap-4  py-8 px-4 xs:p-0 xs:pt-4 -translate-y-24 xs:translate-y-0 xs:shadow-none bg-white">
+        <div className="flex -translate-y-24 flex-col gap-4 rounded-lg bg-white  px-4 py-8 shadow-3xl shadow-light-blue xs:translate-y-0 xs:p-0 xs:pt-4 xs:shadow-none">
           <div className="flex flex-col gap-2">
             <div className="flex text-2xl font-bold text-marine-blue">
               Personal Info
@@ -55,7 +55,7 @@ export default function Step1({ setFormData, formData, setCurrentStep }: any) {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center justify-between">
-              <div className="text-marine-blue text-sm">Name</div>
+              <div className="text-sm text-marine-blue">Name</div>
               {errors.name?.message && (
                 <div className="text-xs text-strawberry-red">
                   {errors.name.message}
@@ -65,7 +65,7 @@ export default function Step1({ setFormData, formData, setCurrentStep }: any) {
 
             <input
               {...register("name")}
-              className={`text-lg py-2 pl-7 w-full  placeholder-cool-gray  border-[1px] rounded-lg ${
+              className={`w-full rounded-lg border-[1px] py-2  pl-7  text-lg placeholder-cool-gray ${
                 errors.name && "border-strawberry-red"
               }`}
               type="text"
@@ -74,7 +74,7 @@ export default function Step1({ setFormData, formData, setCurrentStep }: any) {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center justify-between">
-              <div className="text-marine-blue text-sm">Email Address</div>{" "}
+              <div className="text-sm text-marine-blue">Email Address</div>{" "}
               {errors.email?.message && (
                 <div className="text-xs text-strawberry-red">
                   {errors.email.message}
@@ -83,7 +83,7 @@ export default function Step1({ setFormData, formData, setCurrentStep }: any) {
             </div>
 
             <input
-              className={`text-lg py-2 pl-7 w-full placeholder-cool-gray border-[1px] rounded-lg ${
+              className={`w-full rounded-lg border-[1px] py-2 pl-7 text-lg placeholder-cool-gray ${
                 errors.email && "border-strawberry-red"
               }`}
               {...register("email")}
@@ -93,7 +93,7 @@ export default function Step1({ setFormData, formData, setCurrentStep }: any) {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center justify-between">
-              <div className="text-marine-blue text-sm">Phone Number</div>
+              <div className="text-sm text-marine-blue">Phone Number</div>
               {errors.phone?.message && (
                 <div className="text-xs text-strawberry-red">
                   {errors.phone.message}
@@ -103,7 +103,7 @@ export default function Step1({ setFormData, formData, setCurrentStep }: any) {
 
             <input
               {...register("phone")}
-              className={`text-lg py-2 pl-7 w-full  placeholder-cool-gray  border-[1px] rounded-lg ${
+              className={`w-full rounded-lg border-[1px] py-2  pl-7  text-lg placeholder-cool-gray ${
                 errors.phone && "border-strawberry-red"
               }`}
               type="number"
@@ -111,13 +111,13 @@ export default function Step1({ setFormData, formData, setCurrentStep }: any) {
             />
           </div>
         </div>
-        <div className="flex w-full h-full justify-end  ">
+        <div className="flex h-full w-full justify-end  ">
           <div className="flex items-end ">
             {" "}
             <button
               type="submit"
               form="step1"
-              className="flex text-base text-white bottom-0 rounded-lg px-4 py-2 bg-marine-blue"
+              className="bottom-0 flex rounded-lg bg-marine-blue px-4 py-2 text-base text-white"
             >
               Next Step
             </button>

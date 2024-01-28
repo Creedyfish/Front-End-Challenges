@@ -72,10 +72,10 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
     <>
       <form
         id="step2"
-        className="bg-white h-full flex flex-col relative xs:min-w-[440px]   "
+        className="relative flex h-full flex-col bg-white xs:min-w-[440px]   "
         onSubmit={handleSubmit(savedData)}
       >
-        <div className="h-full shadow-light-blue flex flex-col shadow-3xl rounded-lg gap-4  py-8 px-4 xs:p-0 xs:pt-4 -translate-y-24 xs:translate-y-0 xs:shadow-none bg-white">
+        <div className="flex h-full -translate-y-24 flex-col gap-4 rounded-lg bg-white  px-4 py-8 shadow-3xl shadow-light-blue xs:translate-y-0 xs:p-0 xs:pt-4 xs:shadow-none">
           <div className="flex flex-col gap-2">
             <div className="text-2xl font-bold text-marine-blue">
               Select your plan
@@ -84,7 +84,7 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
               You have the option of monthly or yearly billing.{" "}
             </div>
           </div>
-          <div className="flex flex-col xs:grid xs:grid-cols-3 gap-2 h-full">
+          <div className="flex h-full flex-col gap-2 xs:grid xs:grid-cols-3">
             <div className="">
               <input
                 {...register("plan")}
@@ -98,8 +98,8 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
                 htmlFor="arcade"
                 className="flex rounded-md outline outline-1 outline-light-gray peer-checked:outline-purplish-blue"
               >
-                <div className="grid grid-cols-[max-content_1fr]  p-3 gap-x-3 xs:flex flex-col ">
-                  <div className="flex items-center xs:w-24 xs:h-20 xs:items-start">
+                <div className="grid grid-cols-[max-content_1fr]  flex-col gap-x-3 p-3 xs:flex ">
+                  <div className="flex items-center xs:h-20 xs:w-24 xs:items-start">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="40"
@@ -131,7 +131,7 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
                     <>
                       {" "}
                       <div></div>
-                      <div className="text-marine-blue text-sm font-medium">
+                      <div className="text-sm font-medium text-marine-blue">
                         2 months free
                       </div>
                     </>
@@ -152,8 +152,8 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
                 htmlFor="advanced"
                 className="flex rounded-md outline outline-1 outline-light-gray peer-checked:outline-purplish-blue"
               >
-                <div className="grid grid-cols-[max-content_1fr] p-3 gap-x-3  xs:flex flex-col">
-                  <div className="flex items-center w-full h-full xs:w-24 xs:h-20 xs:items-start">
+                <div className="grid grid-cols-[max-content_1fr] flex-col gap-x-3  p-3 xs:flex">
+                  <div className="flex h-full w-full items-center xs:h-20 xs:w-24 xs:items-start">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="40"
@@ -184,7 +184,7 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
                     <>
                       {" "}
                       <div></div>
-                      <div className="text-marine-blue text-sm font-medium">
+                      <div className="text-sm font-medium text-marine-blue">
                         2 months free
                       </div>
                     </>
@@ -205,8 +205,8 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
                 htmlFor="pro"
                 className="flex rounded-md outline outline-1 outline-light-gray peer-checked:outline-purplish-blue"
               >
-                <div className="grid grid-cols-[max-content_1fr] p-3 gap-x-3 xs:flex flex-col">
-                  <div className="flex items-center xs:w-24 xs:h-20 xs:items-start">
+                <div className="grid grid-cols-[max-content_1fr] flex-col gap-x-3 p-3 xs:flex">
+                  <div className="flex items-center xs:h-20 xs:w-24 xs:items-start">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="40"
@@ -237,7 +237,7 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
                     <>
                       {" "}
                       <div></div>
-                      <div className="text-marine-blue text-sm font-medium">
+                      <div className="text-sm font-medium text-marine-blue">
                         2 months free
                       </div>
                     </>
@@ -246,7 +246,7 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
               </label>
             </div>
           </div>
-          <div className="flex gap-4 justify-center items-center p-5">
+          <div className="flex items-center justify-center gap-4 p-5">
             <div
               className={`${
                 billing === "Monthly" ? ` text-marine-blue` : `text-cool-gray`
@@ -256,17 +256,17 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
             </div>
             <label
               htmlFor="billing"
-              className="relative w-9 h-[18px] rounded-full bg-marine-blue"
+              className="relative h-[18px] w-9 rounded-full bg-marine-blue"
             >
               <input
                 id="billing"
                 type="checkbox"
                 onChange={handleChange}
-                className="sr-only peer"
+                className="peer sr-only"
                 checked={billing === "Yearly"}
                 value={"Yearly"}
               />
-              <span className="absolute w-3 h-3 top-[3px] left-1 rounded-full bg-white peer-checked:translate-x-4 transition-all ease-in-out duration-100"></span>
+              <span className="absolute left-1 top-[3px] h-3 w-3 rounded-full bg-white transition-all duration-100 ease-in-out peer-checked:translate-x-4"></span>
             </label>
             <div
               className={`${
@@ -278,19 +278,19 @@ export default function Step2({ setFormData, formData, setCurrentStep }: any) {
           </div>
         </div>
 
-        <div className="flex w-full h-full justify-end  ">
-          <div className="flex items-end justify-between w-full ">
+        <div className="flex h-full w-full justify-end  ">
+          <div className="flex w-full items-end justify-between ">
             <button
               type="button"
               onClick={(e) => setCurrentStep((prev: any) => prev - 1)}
-              className="flex font-medium text-sm text-cool-gray bottom-0 rounded-md px-4 py-2 "
+              className="bottom-0 flex rounded-md px-4 py-2 text-sm font-medium text-cool-gray "
             >
               Go Back
             </button>{" "}
             <button
               type="submit"
               form="step2"
-              className="flex text-base text-white bottom-0 rounded-lg px-4 py-2 bg-marine-blue"
+              className="bottom-0 flex rounded-lg bg-marine-blue px-4 py-2 text-base text-white"
             >
               Next Step
             </button>

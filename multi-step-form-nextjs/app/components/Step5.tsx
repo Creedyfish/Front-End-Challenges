@@ -6,9 +6,9 @@ export default function Step5({ setFormData, formData, setCurrentStep }: any) {
   return (
     <>
       {popUp && (
-        <div className="fixed bg-black bg-opacity-45 right-0 z-50 w-full h-full flex justify-center items-center">
-          <div className=" flex justify-center  h-full">
-            <div className="flex flex-col gap-2 rounded-lg overflow-hidden bg-white">
+        <div className="fixed right-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-45">
+          <div className=" flex h-full  justify-center">
+            <div className="flex flex-col gap-2 overflow-hidden rounded-lg bg-white">
               <div className="">
                 <Image
                   src={"/images/bg-sidebar-mobile.svg"}
@@ -18,31 +18,31 @@ export default function Step5({ setFormData, formData, setCurrentStep }: any) {
                   alt="Background Image"
                 />
               </div>
-              <div className="text-2xl font-bold text-marine-blue text-center">
+              <div className="text-center text-2xl font-bold text-marine-blue">
                 User Information
               </div>
-              <div className="flex flex-col p-4 gap-2">
-                <div className="text-cool-gray flex gap-2 text-sm items-center">
+              <div className="flex flex-col gap-2 p-4">
+                <div className="flex items-center gap-2 text-sm text-cool-gray">
                   Name:{" "}
-                  <div className="text-marine-blue font-medium text-base">
+                  <div className="text-base font-medium text-marine-blue">
                     {formData.name}
                   </div>
                 </div>
-                <div className="text-cool-gray flex gap-2 text-sm items-center">
+                <div className="flex items-center gap-2 text-sm text-cool-gray">
                   Email:{" "}
-                  <div className="text-marine-blue font-medium text-base">
+                  <div className="text-base font-medium text-marine-blue">
                     {formData.email}
                   </div>
                 </div>
-                <div className="text-cool-gray flex gap-2 text-sm items-center">
+                <div className="flex items-center gap-2 text-sm text-cool-gray">
                   Phone:{" "}
-                  <div className="text-marine-blue font-medium text-base">
+                  <div className="text-base font-medium text-marine-blue">
                     {formData.phone}
                   </div>
                 </div>
-                <div className="text-cool-gray flex gap-2 text-sm items-center">
+                <div className="flex items-center gap-2 text-sm text-cool-gray">
                   Plan:{" "}
-                  <div className="text-marine-blue font-medium text-base">
+                  <div className="text-base font-medium text-marine-blue">
                     <div className="flex gap-4">
                       <div>{formData.plan}</div>
                       <div>
@@ -52,15 +52,15 @@ export default function Step5({ setFormData, formData, setCurrentStep }: any) {
                     </div>
                   </div>
                 </div>
-                <div className="text-cool-gray flex gap-2 text-sm items-center">
+                <div className="flex items-center gap-2 text-sm text-cool-gray">
                   Billing:{" "}
-                  <div className="text-marine-blue font-medium text-base">
+                  <div className="text-base font-medium text-marine-blue">
                     {formData.billing}
                   </div>
                 </div>
-                <div className="flex gap-2 text-cool-gray text-sm">
+                <div className="flex gap-2 text-sm text-cool-gray">
                   Addons:
-                  <div className="flex flex-col text-marine-blue font-medium text-base">
+                  <div className="flex flex-col text-base font-medium text-marine-blue">
                     {formData.addOns.map((addOn: any, index: number) => (
                       <div key={index} className="flex justify-between gap-4">
                         <div>{addOn.name} </div>
@@ -72,16 +72,16 @@ export default function Step5({ setFormData, formData, setCurrentStep }: any) {
                     ))}
                   </div>
                 </div>
-                <div className="text-marine-blue flex gap-2 text-sm items-center">
+                <div className="flex items-center gap-2 text-sm text-marine-blue">
                   Total:{" "}
-                  <div className="text-marine-blue font-bold text-lg">
+                  <div className="text-lg font-bold text-marine-blue">
                     ${formData.total}
                     {payment}
                   </div>
                 </div>
                 <div className="flex justify-center p-2">
                   <button
-                    className="bg-marine-blue hover:bg-purplish-blue py-2 px-6 rounded-lg text-white"
+                    className="rounded-lg bg-marine-blue px-6 py-2 text-white hover:bg-purplish-blue"
                     onClick={() => setPopUp(false)}
                   >
                     CLOSE
@@ -92,15 +92,15 @@ export default function Step5({ setFormData, formData, setCurrentStep }: any) {
           </div>
         </div>
       )}
-      <div className="bg-white h-full flex flex-col relative xs:max-w-[440px]">
-        <div className="h-full justify-center items-center flex flex-col shadow-3xl shadow-light-blue rounded-lg gap-4  py-20 xs:py-8 px-4 xs:p-0 xs:pt-4 -translate-y-24 xs:translate-y-0 xs:shadow-none bg-white">
+      <div className="relative flex h-full flex-col bg-white xs:max-w-[440px]">
+        <div className="flex h-full -translate-y-24 flex-col items-center justify-center gap-4 rounded-lg bg-white  px-4 py-20 shadow-3xl shadow-light-blue xs:translate-y-0 xs:p-0 xs:py-8 xs:pt-4 xs:shadow-none">
           <div className="p-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="80"
               height="80"
               viewBox="0 0 80 80"
-              className="w-14 h-14"
+              className="h-14 w-14"
             >
               <g fill="none">
                 <circle cx="40" cy="40" r="40" fill="#F9818E" />
@@ -116,7 +116,7 @@ export default function Step5({ setFormData, formData, setCurrentStep }: any) {
             </svg>
           </div>
           <div className="text-2xl font-bold text-marine-blue">Thank you!</div>
-          <div className="text-cool-gray text-center">
+          <div className="text-center text-cool-gray">
             Thanks for confirming your subscription! We hope you have fun using
             our platform. If you ever need support, please feel free to email us
             at support@loremgaming.com
