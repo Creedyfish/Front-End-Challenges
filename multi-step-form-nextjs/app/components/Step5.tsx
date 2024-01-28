@@ -1,13 +1,97 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { DevTool } from "@hookform/devtools";
-
-// type Step4Fields = Partial<z.infer<typeof Step4Schema>>;
-
+import { useState } from "react";
+import Image from "next/image";
 export default function Step5({ setFormData, formData, setCurrentStep }: any) {
+  const [popUp, setPopUp] = useState(true);
+  const payment = formData.billing === "Monthly" ? "/mo" : "/yr";
   return (
     <>
+      {popUp && (
+        <div className="fixed bg-black bg-opacity-45 right-0 z-50 w-full h-full flex justify-center items-center">
+          <div className=" flex justify-center  h-full">
+            <div className="flex flex-col gap-2 rounded-lg overflow-hidden bg-white">
+              <div className="">
+                <Image
+                  src={"/images/bg-sidebar-mobile.svg"}
+                  width={375}
+                  height={172}
+                  loading="lazy"
+                  alt="Background Image"
+                />
+              </div>
+              <div className="text-2xl font-bold text-marine-blue text-center">
+                User Information
+              </div>
+              <div className="flex flex-col p-4 gap-2">
+                <div className="text-cool-gray flex gap-2 text-sm items-center">
+                  Name:{" "}
+                  <div className="text-marine-blue font-medium text-base">
+                    {formData.name}
+                  </div>
+                </div>
+                <div className="text-cool-gray flex gap-2 text-sm items-center">
+                  Email:{" "}
+                  <div className="text-marine-blue font-medium text-base">
+                    {formData.email}
+                  </div>
+                </div>
+                <div className="text-cool-gray flex gap-2 text-sm items-center">
+                  Phone:{" "}
+                  <div className="text-marine-blue font-medium text-base">
+                    {formData.phone}
+                  </div>
+                </div>
+                <div className="text-cool-gray flex gap-2 text-sm items-center">
+                  Plan:{" "}
+                  <div className="text-marine-blue font-medium text-base">
+                    <div className="flex gap-4">
+                      <div>{formData.plan}</div>
+                      <div>
+                        ${formData.price}
+                        {payment}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-cool-gray flex gap-2 text-sm items-center">
+                  Billing:{" "}
+                  <div className="text-marine-blue font-medium text-base">
+                    {formData.billing}
+                  </div>
+                </div>
+                <div className="flex gap-2 text-cool-gray text-sm">
+                  Addons:
+                  <div className="flex flex-col text-marine-blue font-medium text-base">
+                    {formData.addOns.map((addOn: any) => (
+                      <div className="flex justify-between gap-4">
+                        <div>{addOn.name} </div>
+                        <div>
+                          ${addOn.price}
+                          {payment}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="text-marine-blue flex gap-2 text-sm items-center">
+                  Total:{" "}
+                  <div className="text-marine-blue font-bold text-lg">
+                    ${formData.total}
+                    {payment}
+                  </div>
+                </div>
+                <div className="flex justify-center p-2">
+                  <button
+                    className="bg-marine-blue hover:bg-purplish-blue py-2 px-6 rounded-lg text-white"
+                    onClick={() => setPopUp(false)}
+                  >
+                    CLOSE
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="bg-white h-full flex flex-col relative xs:max-w-[440px]">
         <div className="h-full justify-center items-center flex flex-col shadow-3xl shadow-light-blue rounded-lg gap-4  py-20 xs:py-8 px-4 xs:p-0 xs:pt-4 -translate-y-24 xs:translate-y-0 xs:shadow-none bg-white">
           <div className="p-2">

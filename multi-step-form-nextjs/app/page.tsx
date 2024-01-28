@@ -20,6 +20,7 @@ export default function Page() {
   };
   const [formData, setFormData] = useState({});
   const [final, setFinal] = useState(false);
+
   const [currentStep, setCurrentStep] = useState(1);
   console.log(formData);
   return (
